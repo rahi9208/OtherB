@@ -1,7 +1,18 @@
 let AWS = require('aws-sdk');
-exports.handler = function(event, context, callback) {
+const ddb = new AWS.DynamoDB.DocumentClient();
+exports.handler = function (event, context, callback) {
 
-	console.log("Hello BrightTalk");
+	ddb.put({
+		TableName: 'OtherB',
+		Item: { 'itemCode': event.itemCode, 'itemName': event.itemName, 'itemPrice': event.itemPrice, 'itemType': event.itemType }
+	}, function (err, data) {
+		if (err) {
+			callback(err);
+		} else {
+			callback(null, 'Successfully executed');
+		}
+	});
 
-	callback(null,'Successfully executed');
+
+	
 }
