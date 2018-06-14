@@ -5,12 +5,13 @@ exports.handler = function (event, context, callback) {
 		"isBase64Encoded": 1,
 		"statusCode": 200,
 		"headers": {
-			"headerName": "headerValue"
+			"Access-Control-Allow-Origin": "*"
 		},
 		"body": "..."
 	};
 
 	let itemType = (event.queryStringParameters && event.queryStringParameters.type) || "VEG";
+	console.log("Searching for ", itemType);
 
 	ddb.scan({
 		TableName: 'OtherB',
