@@ -21,7 +21,9 @@ exports.handler = function (event, context, callback) {
 		FilterExpression: 'itemType = :it'
 	}, function (err, data) {
 		if (!err && data.Items) {
-			response.body = JSON.stringify(data.Items);
+			response.body = JSON.stringify(data.Items.map((item)=>{
+				item.image = "https://s3.amazonaws.com/"+
+			}));
 		} else {
 			response.statusCode = 404;
 			response.body = "No Items";
